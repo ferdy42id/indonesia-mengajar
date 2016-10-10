@@ -1,0 +1,32 @@
+RewriteEngine On
+
+RewriteBase /
+
+RewriteRule ^home$ index.php
+
+RewriteRule ^hubungi-kami$ contact.php
+
+RewriteRule ^login$ login.php
+
+RewriteRule ^register$ register.php
+
+RewriteRule ^kabar-terbaru$ news.php
+
+RewriteRule ^kabar-terbaru/topic/([a-z]+)$ news.php?category=$1
+
+RewriteRule ^kabar-terbaru/([a-zA-Z0-9-/]+)$ news.php?title=$1
+
+RewriteRule ^admin/list-artikel$ admin/list_article.php
+
+RewriteRule ^admin/home$ admin/index.php
+
+RewriteRule ^admin/home/([0-9]+)$ admin/index.php?success=$1
+
+RewriteRule ^admin/list-artikel/([a-z]+)$ admin/list_article.php?category=$1
+
+RewriteRule ^admin/edit-artikel/([0-9]+)$ admin/edit_article.php?id=$1
+
+RewriteRule ^settings$ profile_user.php
+
+RewriteRule ^settings/change-profile$ profile_detail.php
+
