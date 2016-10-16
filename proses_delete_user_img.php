@@ -2,14 +2,14 @@
 require_once('Database.php');
 require_once('User.php');
 $user = new User;
-$database = new Database;
-$current_email = $_POST['current_email'];
-$email = $_POST['email'];
+$id = $_POST['id'];
+$images = $_POST['images'];
 $submit = $_POST['submit'];
 
 if($submit){
-	$user->setEmail($email);
-	$user->changeEmail($current_email);
+	$user->setId($id);
+	$user->setImages($images);
+	$user->deleteImagesUser();
 }
 
 

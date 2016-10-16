@@ -300,7 +300,7 @@ else{
 <?php
 
 echo jsHref();
-echo 'nama';
+ 
 
 ?>
 <!-- ini untuk input type date di internet exlplorer-->

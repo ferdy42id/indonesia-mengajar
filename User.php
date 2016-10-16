@@ -157,7 +157,7 @@ class User{
 	}
 
 	function changePassword($confirm_password){
-		$show = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE username = '".$this->username."'");
+		$show = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email = '".$this->email."'");
 		$dataUser = mysqli_fetch_array($show);
 
 		$current_password_db = $dataUser['password'];
@@ -166,40 +166,48 @@ class User{
 			if($this->newPassword == $confirm_password){
 				$select = mysqli_query($this->koneksi(),"SELECT password FROM USER WHERE password = '$this->newPassword'");
 				if(mysqli_num_rows($select)){
-					echo 'password sudah dipakai';
+					echo 'password sudah dipakai<br>';
+					echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 				}else{
 					$save = mysqli_query($this->koneksi(), "UPDATE user SET password = '".$this->getNewPassword()."' WHERE username = '".$this->getUsername()."' AND password = '".$current_password_db."'");
 					if($save){
+						$to      = 'admin@ferdynosopian.hol.es';
+						$subject = 'Password has been change';
+						$message = 'Your password has ben change at';
+						$headers = 'From: webmaster@example.com' . "\r\n" .
+						'Reply-To: webmaster@example.com' . "\r\n" .
+						'X-Mailer: PHP/' . phpversion();
+
+						mail($to, $subject, $message, $headers);
 						header("location:settings");
-					// hanya utnuk mengecek
-					// echo "SELECT * FROM user WHERE username = '".$this->username."'"."<br>";
-					// echo $current_password_db.'<br>';
-					// echo $this->password.'<br>';
-					// echo $this->newPassword.'<br>';
-					// echo $confirm_password.'<br>';
-					// echo "UPDATE user SET password = '".$this->getNewPassword()."' WHERE username = '".$this->getUsername()."' AND password = '".$current_password_db."'";
 					}else{
-						echo 'gagal';
+						echo 'gagal<br>';
+						echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
+
 					}
 				}
 			}else{
-				echo 'password konfirmasi salah';
+				echo 'password konfirmasi salah<br>';
+				echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}else{
-			echo 'password salah';
+			echo 'password salah<br>';
+			echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 		}
 	}
 
 	function changeEmail($current_email){
 		$select = mysqli_query($this->koneksi(),"SELECT email FROM USER WHERE email = '$this->email'");
 		if(mysqli_num_rows($select)){
-			echo 'email sudah dipakai';
+			echo 'email sudah dipakai<br>';
+			echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 		}else{
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET email = '$this->email' WHERE email = '".$current_email."' ");
 			if($save){
 				header('location:settings');
 			}else{
-				echo 'gagal';
+				echo 'gagal<br>';
+				echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}
 	}
@@ -209,7 +217,8 @@ class User{
 		if ($save) {
 			header('location:settings');
 		}else{
-			echo 'gagal';
+			echo 'gagal<br>';
+			echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 		}
 	}
 
@@ -218,43 +227,77 @@ class User{
 		$dataUser = mysqli_fetch_array($select);
 		
 		if($dataUser['images'] != '' || $dataUser['images'] != null) {
-			// unlink(showImageUser($dataUser['images']));
+			unlink(showImageUser($dataUser['images']));
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '$this->images' WHERE id = '$id'");
 
 			if($save){
-				header('location:change-profile');
+				header('location:settings');
 
 			}else{
-				echo 'tidak';
+				echo 'gagal<br>';
+				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}else{
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '$this->images' WHERE id = '$id'");
 
 			if($save){
-				header('location:change-profile');
+				header('location:settings');
 
 			}else{
-				echo 'tidak';
+				echo 'gagal<br>';
+				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}
 		
+	}
+
+	function deleteImagesUser(){
+		$select = mysqli_query($this->koneksi(), "SELECT images FROM user WHERE id = '$this->id' AND images = '$this->images'");
+		$dataUser = mysqli_fetch_array($select);
+
+		if($dataUser['images'] != '' || $dataUser['images'] != null){
+			unlink(folderImageUser($dataUser['images']));
+			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '' WHERE id = '$this->id' AND images = '$this->images'");
+			if($save){
+				header('location:settings');
+
+			}else{
+				echo 'gagal<br>';
+				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
+			}
+		}
 	}
 
 	function showDataPublic(){
 		$i = 0;
 		$select = mysqli_query($this->koneksi(), "SELECT * FROM user");
 		while($dataUser = mysqli_fetch_array($select)){
+			$time = strtotime($dataUser['birth_date']);
+			$years = date('Y', $time);
+			$month = date('M', $time);
+			$day = date('d', $time);
 			$i++;
 			echo
 			'<div class="col-md-2">
-				<div class="thumbnail border">
-					<img class="img-rounded" src="https://indonesiamengajar.org/media/thumbs/teacher_photos/PM_I_Bengkalis_03_agus-rachmanto.jpg.60x90_q85.jpg" alt="...">
-					<div class="caption">
-						<h5>'.$dataUser['username'].'</h5>
-						<p>
-							'.$dataUser['email'].'
+				<div class="thumbnail">
+					<div class="no-padding thumbnails">
+					';
+					if($dataUser['images'] != '' || $dataUser['images'] != null ){
+						echo '<a><img class="img-rounded img-thumb" src="'; $userImg = $dataUser['images']; echo showImageUser($userImg); echo '"/></a>';
+					}else{
+						$userImg = 'img_profile_default.jpg';
+						echo '<a><img class="img-rounded img-thumb" src="'; echo showImageUser($userImg); echo'"></a>';
+					}	
+					echo'
+					</div>
+					<div class="no-padding">
+						<div class="caption">
+							<h5>'.$dataUser['first_name'].' '.$dataUser['sur_name'].'</h5>
+							<p>
+								'.$day.' '.$month.' '.$years.'
 
-						</p>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>';
@@ -263,7 +306,7 @@ class User{
 
 		// fungsi register
 	function insert($confirm_password){
-		$select = mysqli_query($this->koneksi(),"SELECT email FROM USER WHERE email = '$this->email'");
+		$select = mysqli_query($this->koneksi(),"SELECT email FROM user WHERE email = '$this->email'");
 		if(mysqli_num_rows($select)){
 			echo 'email sudah dipakai';
 		}else{
@@ -271,11 +314,11 @@ class User{
 			$save = mysqli_query( $this->koneksi(), "INSERT INTO user(email, first_name, password) VALUES('$this->email', '$this->first_name', '$this->password')");
 			if($save){
 				echo "sukses<br>";
-				echo "<a href=\"login.php\"><button type class=\"btn btn-danger\">back</button></a>";
+				echo "<a href=\"register\"><button type class=\"btn btn-danger\">back</button></a>";
 			}
 			else{
 				echo "gagal<br>";
-				echo "<a href=\"register.php\"><button type class=\"btn btn-danger\">back</button></a>";
+				echo "<a href=\"register\"><button type class=\"btn btn-danger\">back</button></a>";
 			}	
 		}else{
 			echo 'salah';
@@ -301,10 +344,11 @@ class User{
 			}
 			elseif($this->password != $checkUser['password']){
 				echo 'wrong password <br>';
-				echo "<a href=\"login.php\"><button type class=\"btn btn-danger\">back</button></a>";
+				echo "<a href=\"register\"><button type class=\"btn btn-danger\">back</button></a>";
 			}
 			else{
-				echo "gagal";
+				echo 'gagal<br>';
+				echo '<a href="register"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}
 	}
@@ -317,8 +361,12 @@ class User{
 
 	//fungsi profile
 	function showProfile(){
-		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE username ='".$this->username."'");
+		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email ='".$this->email."'");
 		$dataUser = mysqli_fetch_array($select);
+		$time = strtotime($dataUser['birth_date']);
+		$years = date('Y', $time);
+		$month = date('M', $time);
+		$day = date('d', $time);
 
 		echo'
 			<div class="col-md-3">
@@ -336,7 +384,7 @@ class User{
 
 			<div class="col-md-9">
 				<div class="form-group">
-					<h3><label>'.$dataUser['username'].'</label></h3>
+					<h3><label>'.$dataUser['first_name'].'</label></h3>
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs besar" role="tablist">
 						<li role="presentation" class="active">
@@ -389,7 +437,7 @@ class User{
 													<label class="pull-right">Tanggal lahir :</label>
 												</div>
 												<div class="col-md-8">
-													<p>'.$dataUser['birth_date'].'</p>
+													<p>'.$day.'-'.$month.'-'.$years.'</p>
 												</div>
 											</div>';
 										}if($dataUser['gender'] != '' || $dataUser['gender'] != null){
@@ -525,10 +573,10 @@ class User{
 										<hr>
 										<div class="form-group">
 											<center>
-												<input name="username" type="hidden" value="'.$dataUser['username'].'">
+												<input name="email" type="hidden" value="'.$dataUser['email'].'">
 												<input class="btn btn-default" name="submit" type="submit" value="Simpan Perubahan">
 											</center>
-										</div>	
+										</div>
 									</div>
 								</form>
 							</div>
@@ -540,8 +588,9 @@ class User{
 
 	//fungsi profile detile
 	function showProfileDetail(){
-		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE username ='".$this->username."'");
+		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email ='".$this->email."'");
 		$dataUser = mysqli_fetch_array($select);
+
 
 		echo'
 			<div class="col-md-3">
@@ -553,7 +602,9 @@ class User{
 						<form action="proses_delete_user_img.php" method="post">	
 							<a><img class="img-rounded" src="'; $userImg = $dataUser['images']; echo showImageUser($userImg); echo '"/></a>
 							<div class="form-group no-margin">
-								<input type="submit" class="btn btn-block btn-danger" value="Hapus foto">
+								<input type="hidden" name="id" value="'.$dataUser['id'].'">
+								<input type="hidden" name="images" value="'.$dataUser['images'].'">
+								<input type="submit" name="submit" class="btn btn-block btn-danger" value="Hapus foto">
 							</div>
 							
 						</form>
@@ -596,7 +647,7 @@ class User{
 
 				<div class="form-group">
 
-					<h3><label>'.$dataUser['username'].'</label></h3>
+					<h3><label>'.$dataUser['first_name'].'</label></h3>
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs besar" role="tablist">
 						<li role="presentation" class="active">
@@ -828,7 +879,7 @@ class User{
 										<hr>
 										<div class="form-group">
 											<center>
-												<input name="username" type="hidden" value="'.$dataUser['username'].'">
+												<input name="email" type="hidden" value="'.$dataUser['email'].'">
 												<input class="btn btn-default" name="submit" type="submit" value="Simpan Perubahan">
 											</center>
 										</div>	

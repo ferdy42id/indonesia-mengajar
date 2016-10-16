@@ -16,6 +16,37 @@
 
 }
 
+@media screen and (max-height: 1199px) {
+
+	.thumbnails{
+		min-height: 152px;
+		max-height: 152px;
+	}
+	.img-thumb{
+		min-height: auto;
+		max-height: 152px;	
+	}
+
+
+
+
+}
+@media screen and (min-height: : 1120px) {
+
+	.thumbnails{
+		min-height: auto;
+		max-height: 152px;
+	}
+	.img-thumb{
+		min-height: auto;
+		max-height: 152px;	
+	}
+
+
+
+
+}
+
 
 
 .article-min-height{

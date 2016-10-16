@@ -304,7 +304,7 @@ else{
 <?php
 
 echo jsHref();
-echo 'nama';
+ 
 
 ?>
 </html>

@@ -9,13 +9,10 @@ $id = $_GET['id'];
 $title = $_POST['title'];
 $content = $_POST['content'];
 $submit = $_POST['submit'];
-
-
 	if($submit){
 		$article->setTitle($title);
 		$article->setcontent($content);
 		$article->setId($id);
 		$article->edit();
 	}
-
 ?>
