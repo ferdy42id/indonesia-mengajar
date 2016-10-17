@@ -77,7 +77,7 @@ class Article{
 	function getURL_slug(){
 		return $this->URL_slug;
 	}
-	// Fungsi Masukan artikel
+// Fungsi Masukan artikel
 	function insert(){
 		$save = mysqli_query($this->koneksi(), "INSERT INTO article(URL_slug, title, content, images, userid, dateUpdate, kategoriID) VALUES('$this->URL_slug','$this->title', '$this->content', '$this->images', '$this->userid' , '$this->date' , '$this->category')");
 		if($save){
@@ -87,9 +87,9 @@ class Article{
 			echo 'gagal<br><a href="home/2">back</a>';
 		}
 	}
-	//fungsi edit artikel
+//fungsi edit artikel
 	function edit(){
-		$update = mysqli_query ($this->koneksi(), "UPDATE article set title='$this->title', content='$this->content' WHERE id = $this->id ");
+		$update = mysqli_query ($this->koneksi(), "UPDATE article set title='$this->title', content='$this->content' WHERE id = '$this->id' ");
 		if($update){
 			header('location:home/3');
 		}
@@ -97,9 +97,9 @@ class Article{
 			header('location:home/4');
 		}
 	}
-	//Fungsi Memunculkan value content,title
+//Fungsi Memunculkan value content,title
 	function showValue(){
-		$getValue = mysqli_query($this->koneksi(), "SELECT * FROM article WHERE id = ".$_GET['id']);
+		$getValue = mysqli_query($this->koneksi(), "SELECT * FROM article WHERE id = ".$_GET['articleId']);
 		$show = mysqli_fetch_array($getValue);
 		$title = $show['title'];
 		$content = $show['content'];
@@ -108,7 +108,7 @@ class Article{
 		$this->setContent($content);
 		$this->setDate($date);
 	}
-	// Fungsi Memunculkan Tabel
+// Fungsi Memunculkan Tabel
 	function show(){
 		$i = 0;
 		if(isset($this->categoryName)){
@@ -122,8 +122,8 @@ class Article{
 			echo '
 			<tr>
 				<td>'. $dataArtikel['title'] .'</td>
-				<td>';	$string = $dataArtikel['content'];
-						echo shortContent3($string);
+				<td>';	$string = $dataArtikel['content']; $string_decode = htmlspecialchars_decode($string);
+						echo shortContent3($string_decode);
 				echo'</td>
 				<td>'. $dataArtikel['first_name'] .' '.$dataArtikel['sur_name'].'</td>
 				<td>';	$time = strtotime($dataArtikel['dateUpdate']);
@@ -139,13 +139,13 @@ class Article{
 			';
 		}
 	}
-	// Fungsi detail user
+// Fungsi detail user
 	function showUser(){
 		$show = mysqli_query($this->koneksi(),"SELECT article.*, user.username, user.first_name, user.sur_name FROM article INNER JOIN user ON article.userid = user.id WHERE article.URL_slug = "."'$this->URL_slug'");
 		$dataArtikel = mysqli_fetch_array($show);
 		echo $dataArtikel['first_name'].' '.$dataArtikel['sur_name'];
 	}
-	// Fungsi detail
+// Fungsi detail
 	function showListDetail(){
 		$show = mysqli_query($this->koneksi(),"SELECT article.*, user.username, user.first_name, user.sur_name FROM article INNER JOIN user ON article.userid = user.id WHERE article.URL_slug = "."'$this->URL_slug'");
 		$dataArtikel = mysqli_fetch_array($show);
@@ -184,7 +184,7 @@ class Article{
 				</div>
 				';
 	}
-	// Fungsi list
+// Fungsi list
 	function showList(){
 		$i = 0;
 		if(isset($this->categoryName)){
@@ -224,8 +224,8 @@ class Article{
 								<div class="row">
 									<div class="col-md-12" style="text-align: justify;">
 										';
-										$stringContent = $dataArtikel['content'];
-											echo shortContent($stringContent, $judul);
+										$stringContent = $dataArtikel['content']; $string_decode = htmlspecialchars_decode($stringContent);
+											echo shortContent($string_decode, $judul);
 										echo '
 									</div>
 								</div>
@@ -254,8 +254,8 @@ class Article{
 								<div class="row">
 									<div class="col-md-12" style="text-align: justify;">
 										';
-										$string = $dataArtikel['content'];
-											echo shortContent2($string);
+										$string = $dataArtikel['content']; $string_decode = htmlspecialchars_decode($string);
+											echo shortContent2($string_decode);
 										echo '
 									</div>
 								</div>

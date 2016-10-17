@@ -13,7 +13,7 @@ if(isset($_GET['category'])){
 	$article->setCategoryName($categoryName);
 }
 if(!isset($_SESSION['id'])){
-	header('location:../register.php');
+	header('location:../register');
 }
 else{
 	$id = $_SESSION['id'];

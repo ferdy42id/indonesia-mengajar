@@ -6,7 +6,6 @@
 	$password = $_POST['password'];
 	$submit = $_POST['submit'];
 	$user = new User();
-
 	if($submit){
 		$user->setEmail($email);
 		$user->setPassword($password);

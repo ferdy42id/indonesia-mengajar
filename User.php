@@ -16,63 +16,47 @@ class User{
 	public $website;
 	public $images;
 	public $database;
-
 	function user(){
 		$this->database = new Database();
 		$this->database->konek;
 	}
-
 	function koneksi(){
-
 		$this->database = new Database;
-
 		return $this->database->konek;
-
 	}
-
 	function get(){
 		$get = mysqli_query($this->database->konek, "SELECT * FROM user WHERE username = '$this->username'");
 		$checkUser = mysqli_fetch_array($get);
 		$this->setId($checkUser['id']);
 	}
-
 	//set all
 	function setId($id){
 		$this->id = $id;
 	}
-
 	function setEmail($email){
 		$this->email = $email;
 	}
-
 	function setUsername($username){
 		$this->username = $username;
 	}
-
 	function setPassword($password){
 		$this->password = $password;
 	}
-
 	function setNewPassword($newPassword){
 		$this->newPassword = $newPassword;
 	}
-
 	function setFirstName($first_name){
 		$this->first_name = $first_name;
 	}
-
 	function setSurName($sur_name){
 		$this->sur_name = $sur_name;
 	}
-
 	function setNickName($nickname){
 		$this->nickname = $nickname;
 	}
-
 	function setBirthDate($birth_date){
 		$this->birth_date = $birth_date;
 	}
-
 	function setGender($gender){
 		$this->gender = $gender;
 	}
@@ -80,27 +64,21 @@ class User{
 	function setFacebook($facebook){
 		$this->facebook = $facebook;
 	}
-
 	function setWebsite($website){
 		$this->website = $website;
 	}
-
 	function setImages($images){
 		$this->images = $images;
 	}
-
 	function getId(){
 		return $this->id;
 	}
-
 	function getEmail(){
 		return $this->email;
 	}
-
 	function getUsername(){
 		return $this->username;
 	}
-
 	function getPassword(){
 		return $this->password;
 	}
@@ -110,15 +88,12 @@ class User{
 	function getFirstName(){
 		return $this->first_name;
 	}
-
 	function getSurName(){
 		return $this->sur_name;
 	}
-
 	function getBirthDate(){
 		return $this->birth_date;
 	}
-
 	function getGender(){
 		return $this->gender;
 	}
@@ -126,11 +101,9 @@ class User{
 	function getFacebook(){
 		return $this->facebook;
 	}
-
 	function getWebsite(){
 		return $this->website;
 	}
-
 	function getImages(){
 		return $this->images;
 	}
@@ -139,13 +112,10 @@ class User{
 		echo $this->email . '<br>' ;
 		echo $this->username . '<br>' ;
 		echo $this->password . '<br>' ;
-
 	}
-
 	function sessionUser(){
 		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE id = '".$this->id."'");
 		$dataUser = mysqli_fetch_array($select);
-
 		$this->email = $dataUser['email'];
 		$this->username = $dataUser['username'];
 		$this->first_name = $dataUser['first_name'];
@@ -155,13 +125,10 @@ class User{
 		$this->facebook = $dataUser['facebook_profile'];
 		$this->website = $dataUser['website'];
 	}
-
 	function changePassword($confirm_password){
 		$show = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email = '".$this->email."'");
 		$dataUser = mysqli_fetch_array($show);
-
 		$current_password_db = $dataUser['password'];
-
 		if($this->password == $current_password_db){
 			if($this->newPassword == $confirm_password){
 				$select = mysqli_query($this->koneksi(),"SELECT password FROM USER WHERE password = '$this->newPassword'");
@@ -171,19 +138,17 @@ class User{
 				}else{
 					$save = mysqli_query($this->koneksi(), "UPDATE user SET password = '".$this->getNewPassword()."' WHERE username = '".$this->getUsername()."' AND password = '".$current_password_db."'");
 					if($save){
-						$to      = 'admin@ferdynosopian.hol.es';
+						$to      = 'admin@ferdynosopian.local';
 						$subject = 'Password has been change';
 						$message = 'Your password has ben change at';
 						$headers = 'From: webmaster@example.com' . "\r\n" .
 						'Reply-To: webmaster@example.com' . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();
-
 						mail($to, $subject, $message, $headers);
 						header("location:settings");
 					}else{
 						echo 'gagal<br>';
 						echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
-
 					}
 				}
 			}else{
@@ -195,7 +160,6 @@ class User{
 			echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 		}
 	}
-
 	function changeEmail($current_email){
 		$select = mysqli_query($this->koneksi(),"SELECT email FROM USER WHERE email = '$this->email'");
 		if(mysqli_num_rows($select)){
@@ -211,7 +175,6 @@ class User{
 			}
 		}
 	}
-
 	function changeProfile(){
 		$save = mysqli_query($this->koneksi(), "UPDATE user SET username = '$this->username', first_name = '$this->first_name', sur_name = '$this->sur_name', birth_date = '$this->birth_date', gender = '$this->gender', facebook_profile = '$this->facebook', website = '$this->website' WHERE email = '$this->email'");
 		if ($save) {
@@ -221,28 +184,23 @@ class User{
 			echo '<a href="settings"><button type="button" class="btn btn-primary">back</button></a>';
 		}
 	}
-
 	function changeImages($id){
 		$select = mysqli_query($this->koneksi(), "SELECT images FROM user WHERE id = '$id'");
 		$dataUser = mysqli_fetch_array($select);
 		
 		if($dataUser['images'] != '' || $dataUser['images'] != null) {
-			unlink(showImageUser($dataUser['images']));
+			unlink(folderImageUser($dataUser['images']));
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '$this->images' WHERE id = '$id'");
-
 			if($save){
 				header('location:settings');
-
 			}else{
 				echo 'gagal<br>';
 				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}else{
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '$this->images' WHERE id = '$id'");
-
 			if($save){
 				header('location:settings');
-
 			}else{
 				echo 'gagal<br>';
 				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
@@ -250,24 +208,20 @@ class User{
 		}
 		
 	}
-
 	function deleteImagesUser(){
 		$select = mysqli_query($this->koneksi(), "SELECT images FROM user WHERE id = '$this->id' AND images = '$this->images'");
 		$dataUser = mysqli_fetch_array($select);
-
 		if($dataUser['images'] != '' || $dataUser['images'] != null){
 			unlink(folderImageUser($dataUser['images']));
 			$save = mysqli_query($this->koneksi(), "UPDATE user SET images = '' WHERE id = '$this->id' AND images = '$this->images'");
 			if($save){
 				header('location:settings');
-
 			}else{
 				echo 'gagal<br>';
 				echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
 			}
 		}
 	}
-
 	function showDataPublic(){
 		$i = 0;
 		$select = mysqli_query($this->koneksi(), "SELECT * FROM user");
@@ -295,7 +249,6 @@ class User{
 							<h5>'.$dataUser['first_name'].' '.$dataUser['sur_name'].'</h5>
 							<p>
 								'.$day.' '.$month.' '.$years.'
-
 							</p>
 						</div>
 					</div>
@@ -303,7 +256,6 @@ class User{
 			</div>';
 		}
 	}
-
 		// fungsi register
 	function insert($confirm_password){
 		$select = mysqli_query($this->koneksi(),"SELECT email FROM user WHERE email = '$this->email'");
@@ -327,7 +279,6 @@ class User{
 		
 		
 	}
-
 		// fungsi login
 	function logIn(){
 		$select = mysqli_query( $this->koneksi(), "SELECT * FROM user WHERE email = '$this->email'");
@@ -337,7 +288,6 @@ class User{
 			echo "<a href=\"register\"><button type class=\"btn btn-danger\">back</button></a>";
 		}
 		else{
-
 			if($this->email == $checkUser['email'] && $this->password == $checkUser['password']){
 				$_SESSION['id'] = $checkUser['id'];
 				header('location:admin');
@@ -352,13 +302,11 @@ class User{
 			}
 		}
 	}
-
 		// fungsi logout
 	function logOut(){
 		unset($_SESSION['id']);
 		header('location:home');
 	}
-
 	//fungsi profile
 	function showProfile(){
 		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email ='".$this->email."'");
@@ -367,7 +315,6 @@ class User{
 		$years = date('Y', $time);
 		$month = date('M', $time);
 		$day = date('d', $time);
-
 		echo'
 			<div class="col-md-3">
 				<div class="thumbnail">
@@ -381,7 +328,6 @@ class User{
 					echo'
 				</div>
 			</div>
-
 			<div class="col-md-9">
 				<div class="form-group">
 					<h3><label>'.$dataUser['first_name'].'</label></h3>
@@ -468,11 +414,9 @@ class User{
 												</div>
 											</div>';
 										}
-
 										echo'
 									</div>
 									<center>
-
 										<hr>
 										<a href="settings/change-profile"><button class="btn btn-default">Ubah</button></a>
 									</center>
@@ -585,13 +529,10 @@ class User{
 				</div>
 			</div>';
 	}
-
 	//fungsi profile detile
 	function showProfileDetail(){
 		$select = mysqli_query($this->koneksi(), "SELECT * FROM user WHERE email ='".$this->email."'");
 		$dataUser = mysqli_fetch_array($select);
-
-
 		echo'
 			<div class="col-md-3">
 				<div class="thumbnail">	
@@ -638,15 +579,11 @@ class User{
 					echo'
 					
 					<div class="form-group">
-
 					</div>
 				</div>
 			</div>
-
 			<div class="col-md-9">
-
 				<div class="form-group">
-
 					<h3><label>'.$dataUser['first_name'].'</label></h3>
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs besar" role="tablist">
@@ -722,7 +659,6 @@ class User{
 												<div class="form-group">';
 													if($dataUser['gender'] == '' || $dataUser['gender'] == null){
 														echo '
-
 														<input name="gender" class="form-radio" type="radio" value="male">Laki-Laki
 														<input name="gender" class="form-radio" type="radio" value="female">Perempuan
 														';
@@ -731,7 +667,6 @@ class User{
 															echo'
 															<input name="gender" class="form-radio" type="radio" value="male" checked>Laki-Laki
 															<input name="gender" class="form-radio" type="radio" value="female">Perempuan
-
 															';
 														}else{
 															echo'
@@ -888,11 +823,8 @@ class User{
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 		';
 	}
 }

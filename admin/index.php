@@ -6,7 +6,7 @@ require_once('../Article.php');
 require_once('../Header.php');
 $user = new User();
 if(!isset($_SESSION['id'])){
-	header('location:../register.php');
+	header('location:../register');
 }
 else{
 	$id = $_SESSION['id'];

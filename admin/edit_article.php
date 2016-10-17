@@ -6,20 +6,20 @@ require_once('../Article.php');
 require_once('../Header.php');
 $user = new User();
 $article = new Article();
-$articleId = $_GET['id'];
-$article->setId($articleId);
 $article->get();
 $article->showValue();
 if(!isset($_SESSION['id'])){
-	header('location:../register.php');
+	header('location:../register');
 }
 else{
 	$id = $_SESSION['id'];
+	$articleId = $_GET['articleId'];
 	$user->setId($id);
 	$user->sessionUser();
 	$username = $user->first_name;
 	$user->setUsername($username);
 	$user->get();
+	$article->setId($articleId);
 	$article->setUserId($id);
 }
 ?>
@@ -71,7 +71,7 @@ else{
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="admin/proses_edit_article.php?id=<?php echo $_GET['id']; ?>" method="post" class="form-editor">
+					<form action="admin/proses_edit_article.php?articleId=<?php echo $_GET['articleId']; ?>" method="post" class="form-editor">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">

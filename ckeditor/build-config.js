@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/54808a07adc2d98de6bca6a669b35d40
+ * (2) http://ckeditor.com/builder/0a24f972c1fd61d21452081b26c8ca30
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/54808a07adc2d98de6bca6a669b35d40
+ * (3) http://ckeditor.com/builder/download/0a24f972c1fd61d21452081b26c8ca30
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'office2013',
+	skin: 'moono',
 	preset: 'standard',
 	ignore: [
 		'.bender',
@@ -65,9 +65,9 @@ var CKBUILDER_CONFIG = {
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
 		'image' : 1,
-		'imagepaste' : 1,
 		'imageuploader' : 1,
 		'indentlist' : 1,
+		'insertpre' : 1,
 		'link' : 1,
 		'list' : 1,
 		'magicline' : 1,
@@ -86,8 +86,6 @@ var CKBUILDER_CONFIG = {
 		'tabletools' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
-		'uploadcare' : 1,
-		'uploadimage' : 1,
 		'wsc' : 1,
 		'wysiwygarea' : 1
 	},

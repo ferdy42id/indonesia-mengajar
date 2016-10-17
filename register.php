@@ -27,7 +27,7 @@ if(isset($_SESSION['id'])){
 		<div class="row no-margin">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="home"><img src="https://indonesiamengajar.org/media/uploads/images/logo.png" alt="Logo Indonesia-Mengajar"></a>
+					<a class="navbar-brand" href="home"><img class="img-responsive" src="https://indonesiamengajar.org/media/uploads/images/logo.png" alt="Logo Indonesia-Mengajar"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 					<?php

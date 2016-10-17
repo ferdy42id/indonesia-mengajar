@@ -1,23 +1,13 @@
 .no-border-radius{
-
 	border-radius: 0px;
-
 }
-
 .no-padding{
-
 	padding: 0px;
-
 }
-
 .no-margin{
-
 	margin: 0px;
-
 }
-
 @media screen and (max-height: 1199px) {
-
 	.thumbnails{
 		min-height: 152px;
 		max-height: 152px;
@@ -26,13 +16,8 @@
 		min-height: auto;
 		max-height: 152px;	
 	}
-
-
-
-
 }
 @media screen and (min-height: : 1120px) {
-
 	.thumbnails{
 		min-height: auto;
 		max-height: 152px;
@@ -41,201 +26,90 @@
 		min-height: auto;
 		max-height: 152px;	
 	}
-
-
-
-
 }
-
-
-
 .article-min-height{
-
 	min-height: 270px;
-
 }
-
 @media screen and (max-width: 1199px) {
-
 	.article-min-height{
-
 		min-height: 370px;
-
 	}
-
-
-
 }
-
 @media screen and (max-width: 991px) {
-
 	.article-min-height{
-
 		min-height: 200px;
-
 	}
-
-
-
 }
-
-
-
 /* for hr */
-
 .drop-shadow{
-
 		height: 12px;
-
     border: 0;
-
     box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
-
 }
-
 /* for hr */
-
 .bold{
-
 	height: 2px;
-
 	background-color: #000;
-
 }
-
-
-
 #menu1{
-
-
-
 	min-height:630px;
-
 	height: auto;
-
 	color: #fff;
-
 	background-color: #1E88E5;
-
 	padding: 60px 30px;
-
 	-webkit-transition: all 2s; /* For Safari 3.1 to 6.0 */
-
     transition: all 2s;
-
 }
-
-
-
 /* hover on tabel */
-
 .table-hover tr:hover td{
-
 	background-color: rgba(255,255,255,1);
-
 	color: #000;
-
 }
-
-
-
 /* warna button */
-
 .btn-edition{
-
 	background-color: rgba(255,255,255,0);
-
 }
-
-
-
 #menu2{
-
 	min-height:630px;
-
 	height: auto;
-
 	color: #fff;
-
 	background-color: #1E8;
-
 	padding: 10px 30px;
-
 	-webkit-transition: all 2s; /* For Safari 3.1 to 6.0 */
-
     transition: all 2s;
-
 }
-
-
-
 #menu3{
-
 	min-height:630px;
-
 	height: auto;
-
 	color: #fff;
-
 	background-color: #9A00CC;
-
 	padding: 60px 30px;
-
 	-webkit-transition: all 2s; /* For Safari 3.1 to 6.0 */
-
     transition: all 2s;
-
 }
-
-
-
 #menu4{
-
 	height:630px;
-
 	color: #fff;
-
 	background-color: #9A00CC;
-
 	padding: 10px 30px;
-
 	-webkit-transition: all 2s; /* For Safari 3.1 to 6.0 */
-
     transition: all 2s;
-
 }
-
 body{
-
 	background-color: #fff;
-
 }
-
 .admin{
-
 	padding-top: 120px;
-
 }
-
 .warna{
-
 	background-color: #fff;
-
 }
-
 .top{
-
 	margin-bottom: 0px !important;
-
 }
-
 .navbar-brand{
-
 	height: auto;
-
 }
-
-
 /* for mobile screen page */
 @media screen and (min-width: 768px) {
 	.container{
@@ -243,127 +117,63 @@ body{
 	}
 	
 }
-
 .navbar{
-
 	border-radius:0px !important;
-
 	border:0px !important;
-
 }
-
 .dropdown:hover .dropdown-menu {
-
     display: block;
-
 }
-
 .padding{
-
 	padding-top: 20px;
-
 	padding-bottom: 20px;
-
 }
-
 .warna4{
-
 	background-color: rgba(255,255,255,0.7);
-
 }
-
 .glaphycon{
-
 	margin-right: 10px;
-
 }
-
 .warna1{
-
 	background-color: #fff;
-
 	padding-top: 30px;
-
 }
-
 .foto{
-
 	text-align: center;
-
 }
-
 .caption{
-
 	text-align: center;
-
 }
-
 .border{
-
 	border:0px !important;
-
 }
-
 .besar li a{
-
 	padding: 20px 30px;
-
 }
-
 .nav-tabs li.active a{
-
 	background-color: #A42828;
-
 	color: #fff;
-
-
-
 }
-
 .nav-tabs li.active a:focus{
-
 	background-color: #A42828;
-
 	color: #fff;
-
-
-
 }
-
 .panel{
-
-
-
 	border-radius:0px !important;
-
 	border:0px !important;
-
 	margin-bottom: 0px;
-
 }
-
 .panel-default{
-
 	border-radius:0px !important;
-
 	border:0px !important;
-
 }
-
 .menu{
-
 	float:left;
-
 }
-
 .drop{
-
 	list-style-type: none;
-
 	padding-left: 0px;
-
 }
-
 .profile-online{
 	list-style-type: none;
 	padding-left: 0px;	
@@ -374,227 +184,114 @@ body{
 .fa{
 	color: #000;
 }
-
 .batas{
-
 	padding-bottom: 10px;
-
 	border-bottom: 1px solid rgba(0,0,0,0.2);
-
 }
-
 .batas1{
-
 	padding-top: 15px;
-
 }
-
 .atashr{
-
 	height: 20px;
-
 	border-top: 0px;
-
 	border-bottom: 1px solid #C5BD92;
-
 	border-radius: 20px;
-
 	margin-bottom: -21px;
-
 }
-
 .bawahhr{
-
 	height: 20px;
-
 	border-top: 1px solid #C5BD92;
-
 	border-radius: 20px;
-
 }
-
 .pendaftaran{
-
 	background-color: rgba(220,212,121,0.8);
-
 	border-radius: 20px;
-
 	text-align: center;
-
 	padding: 20px 15px;
-
 }
-
 .article a{
-
 	color:#916E41;
-
 }
-
 .judul{
-
 	color:#916E41;
-
 }
-
 .centered{
-
 	text-align: center;
-
 }
-
 .warna-icon{
-
 	color: #77E327;
-
 }
-
 .nama{
-
 	color: #60B71D;
-
 }
-
 .headerImg{
-
 	width: 100%;
-
 	border: 10px solid #e7e7e7;
-
 	border-radius: 20px;
-
 }
-
 .besarhuruf{
-
 	font-size: 15px;
-
 }
-
 .navbar-default .navbar-nav .active a{
-
 	border-bottom-left-radius: 30px;
-
 	border-top-right-radius: 30px;
-
 }
-
-
-
 @media (min-width: 768px){
-
     .navbar-nav{
-
         float:none;
-
         margin: 0 auto;
-
         display: table;
-
         table-layout: fixed;
-
     }
-
 }
-
 .form-group{
-
 	padding: 10px 15px;
-
 }
-
 .padding-content{
-
 	padding-top:20px;
-
 }
-
 .small{
-
 	width: auto;
-
 }
-
 .panel-body{
-
 	border-top: 2px solid black;
-
 }
-
 .nomor li{
-
 	padding: 10px 30px;
-
 }
-
 textarea.height{
-
 	height: 120px;
-
 }
-
 .profile a{
-
 	float: left;
-
 }
-
 .breadcrumb{
-
 	background-color: transparent;
-
 	margin-bottom: 0px;
-
 	border-radius: 0px;
-
 }
-
 .tengah{
-
 	background-color: #fff;
-
 }
-
 .current-page{
-
 	background-color: #FFFFFF;
-
 }
-
 .jarak{
-
 	margin-top:50px;
-
 	margin-bottom: 0px;
-
 }
-
 .panel{
-
 	margin-top: 50px;
-
 }
-
 .isi{
-
 	display: none;
-
 	transition: all 5s;
-
 	-webkit-transition: all 5s;
-
 	-moz-transition: all 5s;
-
 	-o-transition: all 5s;
-
 }
-
 .midle-menu{
-
 	height: 100px;
-
 	padding: 10px;
-
 	text-align: center;
-
 }

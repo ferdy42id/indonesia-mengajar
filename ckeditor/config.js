@@ -1,19 +1,26 @@
-﻿/**
+/**
  * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
+ CKEDITOR.on('dialogDefinition', function (ev) {
+    var dialogName = ev.data.name;
+    var dialogDefinition = ev.data.definition;
+    var dialog = dialogDefinition.dialog;
+    var editor = ev.editor;
+
+    if (dialogName == 'image') {
+        dialogDefinition.onOk = function (e) {
+            var imageSrcUrl = e.sender.originalElement.$.src;
+            var width = e.sender.originalElement.$.width;
+            var height = e.sender.originalElement.$.height;
+            var imgHtml = CKEDITOR.dom.element.createFromHtml('<img src="' + imageSrcUrl +'" alt="" style="width:' + width + 'px;height:' + height + 'px;" class="img-responsive" />');
+            editor.insertElement(imgHtml);
+        };
+    }
+});
+
 CKEDITOR.editorConfig = function( config ) {
-	
-	// %REMOVE_START%
-	// The configuration options below are needed when running CKEditor from source files.
-	config.plugins = 'dialogui,dialog,about,a11yhelp,basicstyles,blockquote,clipboard,panel,floatpanel,menu,contextmenu,resize,button,toolbar,elementspath,enterkey,entities,popup,filebrowser,floatingspace,listblock,richcombo,format,horizontalrule,htmlwriter,wysiwygarea,image,indent,indentlist,fakeobjects,link,list,magicline,maximize,pastetext,pastefromword,removeformat,showborders,sourcearea,specialchar,menubutton,scayt,stylescombo,tab,table,tabletools,undo,wsc,lineutils,widget,filetools,notification,notificationaggregator,uploadwidget,uploadimage,imageuploader,imagepaste,insertpre';
-	config.skin = 'office2013';
-	// %REMOVE_END%
-	//for <pre>
-	CKEDITOR.config.insertpre_class = 'prettyprint';
-	CKEDITOR.config.insertpre_style = 'background-color:#F8F8F8;border:1px solid #DDD;padding:10px;';
-	
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config

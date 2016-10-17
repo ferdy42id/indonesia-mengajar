@@ -1,5 +1,4 @@
 <?php
-
 	require_once('Database.php');
 	require_once("User.php");
 	$email = $_POST['email'];
@@ -8,7 +7,6 @@
 	$confirm_password = $_POST['confirm_password'];
 	$submit = $_POST['submit'];
 	$user = new User();
-
 	if($submit){
 		$user->setEmail($email);
 		$user->setFirstName($first_name);

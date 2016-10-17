@@ -11,6 +11,7 @@ $title = $_POST['title'];
 $string = $title;
 $URL_slug = replaceTitle($string);
 $content = $_POST['content'];
+$content_encode = htmlspecialchars($content, ENT_QUOTES);
 $category = $_POST['category'];
 $file_name = $_FILES['images']['name'];
 $file_size = $_FILES['images']['size'];
@@ -63,7 +64,7 @@ if($file_type == "image/jpeg" || $file_type == "image/png" || $file_type == "ima
 			$images = $randomName;
 		}
 	}
-	
+
 }else{
 	echo 'Tipe Salah<br>';
 	echo '<a href="settings/change-profile"><button type="button" class="btn btn-primary">back</button></a>';
@@ -71,7 +72,7 @@ if($file_type == "image/jpeg" || $file_type == "image/png" || $file_type == "ima
 		if($submit){
 				$article->setURL_slug($URL_slug);
 				$article->setTitle($title);
-				$article->setcontent($content);
+				$article->setcontent($content_encode);
 				$article->setImages($images);
 				$article->setUserId($userid);
 				$article->setDate($date);

@@ -7,7 +7,6 @@
 		}
 		return $string;
 	}
-
 #short content sisanya
 	function shortContent2($string){
 		$string = strip_tags($string);
@@ -16,7 +15,6 @@
 		}
 		return $string;
 	}
-
 #short content admin list
 	function shortContent3($string){
 		$string = strip_tags($string);
@@ -25,7 +23,6 @@
 		}
 		return $string;
 	}
-
 #ganti symbol, Upercase ke huruf normal
 	function replaceTitle($string){
 		// replace non letter or digits by -
@@ -42,32 +39,26 @@
 		$string = strtolower($string);
 		return $string;
 	}
-
 #show image header	
 	function showImage($img){
 		return 'http://ferdynosopian.local/images/'.$img;
 	}
-
 #show image user	
 	function showImageUser($userImg){
 		return 'http://ferdynosopian.local/admin/user/images/'.$userImg;
 	}
-
 #lokasi image user	
 	function folderImageUser($nameImg){
 		$root =  $_SERVER['DOCUMENT_ROOT'];
 		return $root.'/admin/user/images/'.$nameImg;
 	}
-
 #random name
 	function random_string($length) {
 	    $key = '';
 	    $keys = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
-
 	    for ($i = 0; $i < $length; $i++) {
 	        $key .= $keys[array_rand($keys)];
 	    }
-
 	    return $key;
 	}
 ?>
