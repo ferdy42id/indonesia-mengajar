@@ -2,7 +2,7 @@
  * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
-
+//add class on img tag
  CKEDITOR.on('dialogDefinition', function (ev) {
     var dialogName = ev.data.name;
     var dialogDefinition = ev.data.definition;
@@ -14,7 +14,7 @@
             var imageSrcUrl = e.sender.originalElement.$.src;
             var width = e.sender.originalElement.$.width;
             var height = e.sender.originalElement.$.height;
-            var imgHtml = CKEDITOR.dom.element.createFromHtml('<img src="' + imageSrcUrl +'" alt="" style="width:' + width + 'px;height:' + height + 'px;" class="img-responsive" />');
+            var imgHtml = CKEDITOR.dom.element.createFromHtml('<img src="' + imageSrcUrl +'" alt="" class="img-responsive" />');
             editor.insertElement(imgHtml);
         };
     }

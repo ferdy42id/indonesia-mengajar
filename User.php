@@ -247,9 +247,16 @@ class User{
 					<div class="no-padding">
 						<div class="caption">
 							<h5>'.$dataUser['first_name'].' '.$dataUser['sur_name'].'</h5>
-							<p>
-								'.$day.' '.$month.' '.$years.'
-							</p>
+							';if($dataUser['birth_date'] == "0000-00-00"){
+								echo '';
+							}else{
+								echo '
+									<p>
+										'.$day.' '.$month.' '.$years.'
+									</p>
+								';	
+							}
+						echo '
 						</div>
 					</div>
 				</div>

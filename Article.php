@@ -176,8 +176,8 @@ class Article{
 								echo '';
 							}else{
 								echo '<img class="headerImg" src="'; $img = $dataArtikel['images']; echo showImage($img); echo '"/><br>';
-							}
-								echo $dataArtikel['content'].'
+							}	$string_decode = htmlspecialchars_decode($dataArtikel['content']);
+								echo $string_decode.'
 							</div>
 						</div>
 					</div>
